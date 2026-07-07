@@ -22,10 +22,11 @@ export default function PricingPage() {
               <p>
                 Grow Citable Starter: <span className="font-semibold text-white">$99/month</span>
               </p>
+              <p className="text-zinc-500">Taxes may apply and will be calculated at checkout.</p>
               <p>
                 Grow Citable Growth: <span className="font-semibold text-white">$399/month</span>
               </p>
-              <p>{pricingDisclosure.taxes}</p>
+              <p className="text-zinc-500">Taxes may apply and will be calculated at checkout.</p>
               <p>{pricingDisclosure.selfServeBilling}</p>
               <p>{pricingDisclosure.enterpriseBilling}</p>
             </div>
@@ -46,6 +47,7 @@ export default function PricingPage() {
                 buttonText={plan.ctaLabel}
                 buttonLink={plan.ctaHref}
                 highlighted={plan.highlighted}
+                showTaxNote={plan.monthlyPriceUsd !== null}
               />
             ))}
           </div>
@@ -268,7 +270,8 @@ function PricingCard({
   features, 
   buttonText, 
   buttonLink,
-  highlighted = false 
+  highlighted = false,
+  showTaxNote = false,
 }: { 
   name: string, 
   description: string, 
@@ -277,7 +280,8 @@ function PricingCard({
   features: { text: string, included: boolean }[], 
   buttonText: string, 
   buttonLink: string,
-  highlighted?: boolean 
+  highlighted?: boolean,
+  showTaxNote?: boolean,
 }) {
   return (
     <div className={`border rounded-2xl p-8 flex flex-col ${highlighted ? 'border-white bg-zinc-900' : 'border-zinc-800 bg-zinc-900/50'}`}>
@@ -287,6 +291,9 @@ function PricingCard({
       <div className="mb-6">
         <span className="text-4xl font-bold">{price}</span>
         {period && <span className="text-zinc-400 ml-1">{period}</span>}
+        {showTaxNote && (
+          <p className="mt-2 text-sm text-zinc-500">{pricingDisclosure.taxes}</p>
+        )}
       </div>
 
       <ul className="space-y-3 mb-8 flex-1">

@@ -71,6 +71,9 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
                           {plan.periodLabel}
                         </span>
                       </p>
+                      <p className="mt-2 text-sm text-zinc-500">
+                        {pricingDisclosure.taxes}
+                      </p>
                       <p className="mt-2 text-sm text-zinc-400">{plan.description}</p>
                     </Link>
                   ))}
@@ -92,13 +95,15 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
                     {selectedPlan.periodLabel}
                   </span>
                 </div>
+                <div className="border-b border-zinc-800 pb-4 text-sm text-zinc-500">
+                  {pricingDisclosure.taxes}
+                </div>
                 <div className="flex items-start justify-between gap-4 border-b border-zinc-800 pb-4">
                   <span className="text-zinc-400">Billing cadence</span>
                   <span className="text-right font-medium">Monthly recurring subscription</span>
                 </div>
                 <div className="rounded-xl bg-zinc-950 p-4 text-zinc-300">
-                  <p>{pricingDisclosure.taxes}</p>
-                  <p className="mt-3">{pricingDisclosure.selfServeBilling}</p>
+                  <p>{pricingDisclosure.selfServeBilling}</p>
                 </div>
               </div>
 

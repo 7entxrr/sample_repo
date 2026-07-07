@@ -39,6 +39,11 @@ export default function GetStartedPage() {
                     <span className="text-sm text-zinc-400">{plan.periodLabel}</span>
                   )}
                 </p>
+                {plan.monthlyPriceUsd !== null && (
+                  <p className="-mt-2 mb-4 text-sm text-zinc-500">
+                    {pricingDisclosure.taxes}
+                  </p>
+                )}
                 <ul className="space-y-3 mb-6 text-sm text-zinc-300">
                   {plan.features
                     .filter((feature) => feature.included)
