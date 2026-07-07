@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { Check, X } from "lucide-react";
+import { pricingDisclosure, pricingPlans } from "@/lib/pricing";
 
 export default function PricingPage() {
   return (
@@ -15,69 +16,38 @@ export default function PricingPage() {
           <p className="text-zinc-400 max-w-2xl mx-auto text-lg">
             From bootstrapped startups to global enterprises, Grow Citable delivers the visibility, insights, and control you need to stand out in Answer Engines.
           </p>
+          <div className="mt-8 max-w-3xl mx-auto rounded-2xl border border-zinc-800 bg-zinc-950 p-6 text-left">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-500">Public Pricing</p>
+            <div className="mt-4 space-y-3 text-sm text-zinc-300">
+              <p>
+                Grow Citable Starter: <span className="font-semibold text-white">$99/month</span>
+              </p>
+              <p>
+                Grow Citable Growth: <span className="font-semibold text-white">$399/month</span>
+              </p>
+              <p>{pricingDisclosure.taxes}</p>
+              <p>{pricingDisclosure.selfServeBilling}</p>
+              <p>{pricingDisclosure.enterpriseBilling}</p>
+            </div>
+          </div>
         </section>
 
         {/* Pricing Cards */}
         <section className="px-4 pb-20 max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Starter */}
-            <PricingCard
-              name="Starter"
-              description="For small companies who want to monitor and understand their brand's visibility online"
-              price="$99"
-              period="/month"
-              features={[
-                { text: "ChatGPT tracking only", included: true },
-                { text: "50 prompts tracked", included: true },
-                { text: "Email support", included: true },
-                { text: "3 Answer Engines tracked", included: false },
-                { text: "100 prompts tracked", included: false },
-                { text: "Agents", included: false },
-              ]}
-              buttonText="Choose Starter"
-              buttonLink="/checkout?plan=starter"
-            />
-
-            {/* Growth */}
-            <PricingCard
-              name="Growth"
-              description="For growing companies who want to monitor visibility and create AEO optimized content"
-              price="$399"
-              period="/month"
-              features={[
-                { text: "3 Answer Engines tracked", included: true },
-                { text: "100 prompts tracked", included: true },
-                { text: "Email support", included: true },
-                { text: "ChatGPT, Perplexity, Google AI Overviews", included: true },
-                { text: "9,000 responses monthly", included: true },
-                { text: "400 credits/month", included: true },
-                { text: "Agent Analytics", included: true },
-                { text: "Prompt Volumes", included: true },
-              ]}
-              buttonText="Choose Growth"
-              buttonLink="/checkout?plan=growth"
-              highlighted={true}
-            />
-
-            {/* Enterprise */}
-            <PricingCard
-              name="Enterprise"
-              description="For large companies and agencies building and orchestrating AEO marketing campaigns"
-              price="Custom"
-              period=""
-              features={[
-                { text: "Up to 10 Answer Engines tracked", included: true },
-                { text: "Multiple companies tracked", included: true },
-                { text: "Tailored prompt tracking plan", included: true },
-                { text: "Dedicated Slack support", included: true },
-                { text: "SSO/SAML + SOC2 compliance", included: true },
-                { text: "Custom credits", included: true },
-                { text: "API access", included: true },
-                { text: "Dedicated Specialist with 24 hour SLA", included: true },
-              ]}
-              buttonText="Contact Sales"
-              buttonLink="/contact"
-            />
+            {pricingPlans.map((plan) => (
+              <PricingCard
+                key={plan.slug}
+                name={plan.headline}
+                description={plan.description}
+                price={plan.priceLabel}
+                period={plan.periodLabel}
+                features={plan.features}
+                buttonText={plan.ctaLabel}
+                buttonLink={plan.ctaHref}
+                highlighted={plan.highlighted}
+              />
+            ))}
           </div>
         </section>
 

@@ -1,6 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import { pricingDisclosure, pricingPlans } from "@/lib/pricing";
 
 export default function GetStartedPage() {
   return (
@@ -13,57 +14,51 @@ export default function GetStartedPage() {
           <p className="text-zinc-400 mb-12 text-center text-lg">
             Choose the plan that&apos;s right for your business
           </p>
+          <div className="mb-10 rounded-2xl border border-zinc-800 bg-zinc-950 p-6 text-sm text-zinc-300">
+            <p className="font-semibold text-white">Billing details</p>
+            <p className="mt-3">{pricingDisclosure.taxes}</p>
+            <p className="mt-2">{pricingDisclosure.selfServeBilling}</p>
+            <p className="mt-2">{pricingDisclosure.enterpriseBilling}</p>
+          </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8">
-              <h3 className="text-xl font-bold mb-2">Starter</h3>
-              <p className="text-3xl font-bold mb-4">$99<span className="text-sm text-zinc-400">/month</span></p>
-              <ul className="space-y-3 mb-6 text-sm text-zinc-300">
-                <li>• ChatGPT tracking only</li>
-                <li>• 50 prompts tracked</li>
-                <li>• Email support</li>
-              </ul>
-              <Link 
-                href="/contact?plan=starter"
-                className="block w-full text-center py-3 bg-zinc-800 text-white font-medium rounded-full hover:bg-zinc-700 transition-colors"
+            {pricingPlans.map((plan) => (
+              <div
+                key={plan.slug}
+                className={`rounded-2xl p-8 ${
+                  plan.highlighted
+                    ? "bg-zinc-900 border border-white"
+                    : "bg-zinc-900 border border-zinc-800"
+                }`}
               >
-                Get Started
-              </Link>
-            </div>
-            
-            <div className="bg-zinc-900 border border-white rounded-2xl p-8">
-              <h3 className="text-xl font-bold mb-2">Growth</h3>
-              <p className="text-3xl font-bold mb-4">$399<span className="text-sm text-zinc-400">/month</span></p>
-              <ul className="space-y-3 mb-6 text-sm text-zinc-300">
-                <li>• 3 Answer Engines tracked</li>
-                <li>• 100 prompts tracked</li>
-                <li>• 400 credits/month</li>
-                <li>• Agent Analytics</li>
-              </ul>
-              <Link 
-                href="/contact?plan=growth"
-                className="block w-full text-center py-3 bg-white text-black font-medium rounded-full hover:bg-zinc-200 transition-colors"
-              >
-                Get Started
-              </Link>
-            </div>
-            
-            <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8">
-              <h3 className="text-xl font-bold mb-2">Enterprise</h3>
-              <p className="text-3xl font-bold mb-4">Custom</p>
-              <ul className="space-y-3 mb-6 text-sm text-zinc-300">
-                <li>• Up to 10 Answer Engines</li>
-                <li>• Multiple companies</li>
-                <li>• Dedicated support</li>
-                <li>• API access</li>
-              </ul>
-              <Link 
-                href="/contact?plan=enterprise"
-                className="block w-full text-center py-3 bg-zinc-800 text-white font-medium rounded-full hover:bg-zinc-700 transition-colors"
-              >
-                Contact Sales
-              </Link>
-            </div>
+                <h3 className="text-xl font-bold mb-2">{plan.headline}</h3>
+                <p className="text-sm text-zinc-400 mb-4">{plan.description}</p>
+                <p className="text-3xl font-bold mb-4">
+                  {plan.priceLabel}
+                  {plan.periodLabel && (
+                    <span className="text-sm text-zinc-400">{plan.periodLabel}</span>
+                  )}
+                </p>
+                <ul className="space-y-3 mb-6 text-sm text-zinc-300">
+                  {plan.features
+                    .filter((feature) => feature.included)
+                    .slice(0, 4)
+                    .map((feature) => (
+                      <li key={feature.text}>• {feature.text}</li>
+                    ))}
+                </ul>
+                <Link
+                  href={plan.ctaHref}
+                  className={`block w-full text-center py-3 font-medium rounded-full transition-colors ${
+                    plan.highlighted
+                      ? "bg-white text-black hover:bg-zinc-200"
+                      : "bg-zinc-800 text-white hover:bg-zinc-700"
+                  }`}
+                >
+                  {plan.ctaLabel}
+                </Link>
+              </div>
+            ))}
           </div>
         </section>
       </main>
