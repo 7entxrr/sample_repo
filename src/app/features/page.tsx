@@ -1,7 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import { Zap, BarChart3, Bot, Target, TrendingUp, Shopping } from "lucide-react";
+import { Zap, BarChart3, Bot, Target, TrendingUp, ShoppingBag } from "lucide-react";
 
 export default function FeaturesPage() {
   return (
@@ -12,7 +12,7 @@ export default function FeaturesPage() {
         <section className="px-4 py-20 max-w-7xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">Features</h1>
           <p className="text-zinc-400 mb-12 text-center text-lg max-w-2xl mx-auto">
-            Everything you need to optimize your brand's visibility in AI search
+            Everything you need to optimize your brand&apos;s visibility in AI search
           </p>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -47,7 +47,7 @@ export default function FeaturesPage() {
               link="/features/aim"
             />
             <FeatureCard
-              icon={Shopping}
+              icon={ShoppingBag}
               title="Shopping"
               description="Track your products in AI shopping recommendations."
               link="/features/shopping"
@@ -61,7 +61,7 @@ export default function FeaturesPage() {
   );
 }
 
-function FeatureCard({ icon: Icon, title, description, link }: { icon: any, title: string, description: string, link: string }) {
+function FeatureCard({ icon: Icon, title, description, link }: { icon: React.ComponentType<{ className?: string }>, title: string, description: string, link: string }) {
   return (
     <Link href={link} className="block group">
       <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-zinc-700 transition-colors h-full">

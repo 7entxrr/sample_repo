@@ -1,7 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import { Check, X, ChevronRight } from "lucide-react";
+import { Check, X } from "lucide-react";
 
 export default function PricingPage() {
   return (

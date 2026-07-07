@@ -89,7 +89,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto text-center">
             <p className="text-sm text-zinc-400 mb-8">Used by the best marketers in the world</p>
             <p className="text-lg md:text-xl text-zinc-300 max-w-3xl mx-auto mb-12">
-              Over 100 million people search with AI every day. Brands that aren't recommended get left behind. Grow Citable ensures yours isn't one of them.
+              Over 100 million people search with AI every day. Brands that aren&apos;t recommended get left behind. Grow Citable ensures yours isn&apos;t one of them.
             </p>
           </div>
         </section>
@@ -142,7 +142,7 @@ export default function Home() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 md:p-12">
               <p className="text-lg md:text-xl text-zinc-300 mb-6">
-                "We chose Grow Citable because it seemed like the deepest and most complete tool in the market. We tried the others, and Grow Citable was immediately the obvious choice"
+                &ldquo;We chose Grow Citable because it seemed like the deepest and most complete tool in the market. We tried the others, and Grow Citable was immediately the obvious choice&rdquo;
               </p>
               <div>
                 <p className="font-semibold">George Bonaci, VP of Growth & Demand</p>
@@ -259,7 +259,7 @@ export default function Home() {
   );
 }
 
-function FeatureCard({ icon: Icon, title, description, link }: { icon: any, title: string, description: string, link: string }) {
+function FeatureCard({ icon: Icon, title, description, link }: { icon: React.ComponentType<{ className?: string }>, title: string, description: string, link: string }) {
   return (
     <Link href={link} className="block group">
       <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-zinc-700 transition-colors h-full">

@@ -11,7 +11,7 @@ export default function GetStartedPage() {
         <section className="px-4 py-20 max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">Get Started with Grow Citable</h1>
           <p className="text-zinc-400 mb-12 text-center text-lg">
-            Choose the plan that's right for your business
+            Choose the plan that&apos;s right for your business
           </p>
           
           <div className="grid md:grid-cols-3 gap-8">

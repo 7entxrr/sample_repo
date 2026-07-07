@@ -24,7 +24,7 @@ export default function PrivacyPage() {
             <section>
               <h2 className="text-2xl font-bold mb-4">2. How We Use Your Information</h2>
               <p className="text-zinc-300 leading-relaxed">
-                We use your information to provide, maintain, and improve our services; process transactions; communicate with you; and comply with legal obligations. We do not sell your personal data to third parties.
+                We use your information to provide, maintain, and improve our services; process transactions; communicate with you; and comply with legal obligations. We do not sell your personal data to third parties
               </p>
             </section>
             
@@ -64,7 +64,7 @@ export default function PrivacyPage() {
             </section>
             
             <section>
-              <h2 className="text-2xl font-bold mb-4">8. Children's Privacy</h2>
+              <h2 className="text-2xl font-bold mb-4">8. Children&apos;s Privacy</h2>
               <p className="text-zinc-300 leading-relaxed">
                 Our services are not intended for children under 13. We do not knowingly collect personal information from children under 13.
               </p>
