@@ -1,6 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import PaddleCheckoutButton from "@/components/PaddleCheckoutButton";
 import {
   getPlanBySlug,
   pricingDisclosure,
@@ -10,6 +11,8 @@ import {
 type CheckoutPageProps = {
   searchParams: Promise<{
     plan?: string;
+    success?: string;
+    autostart?: string;
   }>;
 };
 
@@ -20,6 +23,8 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
     requestedPlan && requestedPlan.monthlyPriceUsd !== null
       ? requestedPlan
       : selfServePlans[0];
+  const checkoutSuccess = params.success === "1";
+  const shouldAutoStart = params.autostart === "1";
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -31,6 +36,11 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
           <p className="text-zinc-400 mb-8 text-lg">
             Review the exact pricing and billing details for your Grow Citable subscription before checkout.
           </p>
+          {checkoutSuccess && (
+            <div className="mb-8 rounded-2xl border border-green-500/40 bg-green-500/10 p-4 text-sm text-green-200">
+              Paddle returned you to this page after checkout. You can reopen secure checkout below if you need to review it again.
+            </div>
+          )}
           
           <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
             <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8">
@@ -57,7 +67,7 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
                   {selfServePlans.map((plan) => (
                     <Link
                       key={plan.slug}
-                      href={`/checkout?plan=${plan.slug}`}
+                      href={`/checkout?plan=${plan.slug}&autostart=1`}
                       className={`rounded-xl border p-4 transition-colors ${
                         plan.slug === selectedPlan.slug
                           ? "border-white bg-zinc-800"
@@ -95,12 +105,16 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
                     {selectedPlan.periodLabel}
                   </span>
                 </div>
-                <div className="border-b border-zinc-800 pb-4 text-sm text-zinc-500">
-                  {pricingDisclosure.taxes}
+                <div className="flex items-start justify-between gap-4 border-b border-zinc-800 pb-4">
+                  <span className="text-zinc-400">Billing frequency</span>
+                  <span className="text-right font-medium">{selectedPlan.recurringLabel}</span>
                 </div>
                 <div className="flex items-start justify-between gap-4 border-b border-zinc-800 pb-4">
-                  <span className="text-zinc-400">Billing cadence</span>
-                  <span className="text-right font-medium">Monthly recurring subscription</span>
+                  <span className="text-zinc-400">Currency</span>
+                  <span className="text-right font-medium">{selectedPlan.currencyCode}</span>
+                </div>
+                <div className="border-b border-zinc-800 pb-4 text-sm text-zinc-500">
+                  {pricingDisclosure.taxes}
                 </div>
                 <div className="rounded-xl bg-zinc-950 p-4 text-zinc-300">
                   <p>{pricingDisclosure.selfServeBilling}</p>
@@ -108,6 +122,15 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
               </div>
 
               <div className="mt-6 space-y-3">
+                {selectedPlan.paddlePriceId && (
+                  <PaddleCheckoutButton
+                    planName={selectedPlan.headline}
+                    planSlug={selectedPlan.slug}
+                    paddlePriceId={selectedPlan.paddlePriceId}
+                    autoOpen={shouldAutoStart}
+                    buttonClassName="block w-full rounded-full bg-white px-6 py-3 text-center font-medium text-black transition-colors hover:bg-zinc-200 disabled:cursor-not-allowed disabled:bg-zinc-300"
+                  />
+                )}
                 <Link
                   href="/pricing"
                   className="block w-full rounded-full bg-white px-6 py-3 text-center font-medium text-black transition-colors hover:bg-zinc-200"

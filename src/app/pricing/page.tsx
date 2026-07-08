@@ -19,14 +19,21 @@ export default function PricingPage() {
           <div className="mt-8 max-w-3xl mx-auto rounded-2xl border border-zinc-800 bg-zinc-950 p-6 text-left">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-500">Public Pricing</p>
             <div className="mt-4 space-y-3 text-sm text-zinc-300">
-              <p>
-                Grow Citable Starter: <span className="font-semibold text-white">$99/month</span>
-              </p>
-              <p className="text-zinc-500">Taxes may apply and will be calculated at checkout.</p>
-              <p>
-                Grow Citable Growth: <span className="font-semibold text-white">$399/month</span>
-              </p>
-              <p className="text-zinc-500">Taxes may apply and will be calculated at checkout.</p>
+              {pricingPlans
+                .filter((plan) => plan.monthlyPriceUsd !== null)
+                .map((plan) => (
+                  <div key={plan.slug} className="space-y-1">
+                    <p>
+                      {plan.headline}:{" "}
+                      <span className="font-semibold text-white">
+                        {plan.priceLabel}
+                        {plan.periodLabel}
+                      </span>
+                    </p>
+                    <p className="text-zinc-500">{plan.recurringLabel}</p>
+                    <p className="text-zinc-500">{pricingDisclosure.taxes}</p>
+                  </div>
+                ))}
               <p>{pricingDisclosure.selfServeBilling}</p>
               <p>{pricingDisclosure.enterpriseBilling}</p>
             </div>
@@ -43,6 +50,7 @@ export default function PricingPage() {
                 description={plan.description}
                 price={plan.priceLabel}
                 period={plan.periodLabel}
+                recurringLabel={plan.recurringLabel}
                 features={plan.features}
                 buttonText={plan.ctaLabel}
                 buttonLink={plan.ctaHref}
@@ -272,11 +280,13 @@ function PricingCard({
   buttonLink,
   highlighted = false,
   showTaxNote = false,
+  recurringLabel,
 }: { 
   name: string, 
   description: string, 
   price: string, 
   period: string, 
+  recurringLabel: string,
   features: { text: string, included: boolean }[], 
   buttonText: string, 
   buttonLink: string,
@@ -291,6 +301,7 @@ function PricingCard({
       <div className="mb-6">
         <span className="text-4xl font-bold">{price}</span>
         {period && <span className="text-zinc-400 ml-1">{period}</span>}
+        {period && <p className="mt-2 text-sm text-zinc-500">{recurringLabel}</p>}
         {showTaxNote && (
           <p className="mt-2 text-sm text-zinc-500">{pricingDisclosure.taxes}</p>
         )}

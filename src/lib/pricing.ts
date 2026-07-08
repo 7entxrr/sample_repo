@@ -10,7 +10,10 @@ export type PricingPlan = {
   description: string;
   priceLabel: string;
   periodLabel: string;
+  recurringLabel: string;
+  currencyCode: string | null;
   monthlyPriceUsd: number | null;
+  paddlePriceId: string | null;
   ctaLabel: string;
   ctaHref: string;
   highlighted?: boolean;
@@ -32,11 +35,14 @@ export const pricingPlans: PricingPlan[] = [
     headline: "Grow Citable Starter",
     description:
       "For small companies who want to monitor and understand their brand visibility online.",
-    priceLabel: "$99",
+    priceLabel: "$99.00",
     periodLabel: "/month",
+    recurringLabel: "Monthly recurring subscription",
+    currencyCode: "USD",
     monthlyPriceUsd: 99,
+    paddlePriceId: "pri_01kwzg87yb1127xkbdjt3szez6",
     ctaLabel: "Choose Starter",
-    ctaHref: "/checkout?plan=starter",
+    ctaHref: "/checkout?plan=starter&autostart=1",
     features: [
       { text: "ChatGPT tracking only", included: true },
       { text: "50 prompts tracked", included: true },
@@ -54,11 +60,14 @@ export const pricingPlans: PricingPlan[] = [
     headline: "Grow Citable Growth",
     description:
       "For growing companies that need broader Answer Engine coverage and more automation.",
-    priceLabel: "$399",
+    priceLabel: "$399.00",
     periodLabel: "/month",
+    recurringLabel: "Monthly recurring subscription",
+    currencyCode: "USD",
     monthlyPriceUsd: 399,
+    paddlePriceId: "pri_01kwzg7ex4dwyjgrdthmdqt9ae",
     ctaLabel: "Choose Growth",
-    ctaHref: "/checkout?plan=growth",
+    ctaHref: "/checkout?plan=growth&autostart=1",
     highlighted: true,
     features: [
       { text: "ChatGPT, Perplexity, and Google AI Overviews", included: true },
@@ -79,7 +88,10 @@ export const pricingPlans: PricingPlan[] = [
       "For large companies and agencies building tailored Answer Engine optimization programs.",
     priceLabel: "Custom",
     periodLabel: "",
+    recurringLabel: "Custom billing arrangement",
+    currencyCode: null,
     monthlyPriceUsd: null,
+    paddlePriceId: null,
     ctaLabel: "Contact Sales",
     ctaHref: "/contact?plan=enterprise",
     features: [
