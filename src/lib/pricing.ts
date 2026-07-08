@@ -40,7 +40,7 @@ export const pricingPlans: PricingPlan[] = [
     recurringLabel: "Monthly recurring subscription",
     currencyCode: "USD",
     monthlyPriceUsd: 99,
-    paddlePriceId: "pri_01kwzg87yb1127xkbdjt3szez6",
+    paddlePriceId: "pri_01kx09wppypv5mtn40m5nfwah",
     ctaLabel: "Choose Starter",
     ctaHref: "/checkout?plan=starter&autostart=1",
     features: [
@@ -65,7 +65,7 @@ export const pricingPlans: PricingPlan[] = [
     recurringLabel: "Monthly recurring subscription",
     currencyCode: "USD",
     monthlyPriceUsd: 399,
-    paddlePriceId: "pri_01kwzg7ex4dwyjgrdthmdqt9ae",
+    paddlePriceId: "pri_01kx09xpq7ca0rea474wng166f",
     ctaLabel: "Choose Growth",
     ctaHref: "/checkout?plan=growth&autostart=1",
     highlighted: true,
