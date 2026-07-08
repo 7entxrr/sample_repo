@@ -5,8 +5,35 @@ import { Check, X } from "lucide-react";
 import { pricingDisclosure, pricingPlans } from "@/lib/pricing";
 
 export default function PricingPage() {
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: "Grow Citable",
+    description: "Marketing agents to win in Zero Click 2026. Reach millions of consumers who are using AI to discover new products and brands.",
+    brand: { "@type": "Brand", name: "Grow Citable" },
+    offers: pricingPlans
+      .filter((plan) => plan.monthlyPriceUsd !== null)
+      .map((plan) => ({
+        "@type": "Offer",
+        name: plan.headline,
+        price: plan.monthlyPriceUsd,
+        priceCurrency: plan.currencyCode,
+        priceSpecification: {
+          "@type": "UnitPriceSpecification",
+          price: plan.monthlyPriceUsd,
+          priceCurrency: plan.currencyCode,
+          billingDuration: "P1M",
+        },
+        availability: "https://schema.org/InStock",
+      })),
+  };
+
   return (
     <div className="min-h-screen bg-black text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
       <Navigation />
       
       <main className="pt-16">
